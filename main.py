@@ -1,6 +1,7 @@
 from stats import count_words
 from stats import char_counter
 from stats import create_list_of_dictionaries
+import sys
 
 
 
@@ -26,18 +27,22 @@ def format_char_counts(list):
        
 
 
-def main(): 
-    path= "books/frankenstein.txt"
-    text = get_book_text(path)
-    to_be_printed = create_list_of_dictionaries(char_counter(text))
+def main():
+    if len(sys.argv) == 1:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1) 
+    else: 
+        path = sys.argv[1]
+        text = get_book_text(path)
+        to_be_printed = create_list_of_dictionaries(char_counter(text))
     
-    print("============ BOOKBOT ============")
-    print(f"Analyzing book found at {path}...")
-    print("----------- Word Count ----------")
-    print(f"Found {count_words(text)} total words")
-    print("--------- Character Count -------")
-    print(format_char_counts(to_be_printed))
-    print("============= END ===============")
+        print("============ BOOKBOT ============")
+        print(f"Analyzing book found at {path}...")
+        print("----------- Word Count ----------")
+        print(f"Found {count_words(text)} total words")
+        print("--------- Character Count -------")
+        print(format_char_counts(to_be_printed))
+        print("============= END ===============")
 main()
 
 
